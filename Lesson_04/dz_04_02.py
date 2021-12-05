@@ -8,8 +8,6 @@ def currency_rates(val):
     for idx in content_list:
         if val.upper() in idx:
             return float(idx[-24:-17].replace(',', '.'))
-    else:
-        return 'None'
 
 
 print(currency_rates('eur'))
