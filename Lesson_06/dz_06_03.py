@@ -1,27 +1,20 @@
-import csv
+from json import dump
+from itertools import zip_longest
 
 users = []
 hobby = []
 
 with open('users.csv', encoding='utf-8') as f:
-    reader = csv.reader(f)
-    for line in reader:
-        users.append(' '.join(line))
-
-# print(users)
+    for line in f.read().split('\n'):
+        users.append(line.replace(',', ' '))
 
 with open('hobby.csv', encoding='utf-8') as f:
-    reader = csv.reader(f)
-    for line in reader:
-        hobby.append(' '.join(line))
+    for line in f.read().split('\n'):
+        hobby.append(line)
 
-# print(hobby)
+users_hobby = dict(zip_longest(users, hobby, fillvalue=None))
 
-users_hobby = dict((users[i], hobby[i]) if len(hobby) > i else (users[i], None) for i in range(len(users)))
-
-# with open('users_hobby_h.txt', 'w', encoding='utf-8') as f:
-#     for line in range(len(users_hobby)):
-#         f.write(str(users_hobby.items()))
-    # f.write(f'{users_hobby}\n')
+with open('dict_uh.json', 'w', encoding='utf-8') as f:
+    dump(users_hobby, f, ensure_ascii=False, indent=4)
 
 print(users_hobby)
