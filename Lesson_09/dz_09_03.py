@@ -1,25 +1,27 @@
 class Worker:
 
-    name = 'Имя'
-    surname = 'Фамилия'
-    position = 'Должность'
-    _income = {"wage": 3000, "bonus": 500}
+    def __init__(self, name, surname, position, wage, bonus):
+        self.name = name
+        self.surname = surname
+        self.position = position
+        self._income = {"wage": wage, "bonus": bonus}
 
 
 class Position(Worker):
 
     def get_full_name(self):
-        Worker.name = input('Введите имя сотрудника: ')
-        Worker.surname = input('Введите фамилию сотрудника: ')
+        return f'{self.name} {self.surname}'
 
     def get_total_income(self):
-        return Worker._income.get("wage") + Worker._income.get("bonus")
+        total = sum(self._income.values())
+        return total
 
 
-worker_001 = Position()
-worker_001.get_full_name()
-print(f'Сотрудник {Worker.name} {Worker.surname} в сумме получает {worker_001.get_total_income()}$')
+worker_001 = Position('Василий', 'Бровкин', 'Электрик', 6000, 400)
+print(worker_001.get_full_name())
+print(worker_001.get_total_income())
+print()
 
-worker_002 = Position()
-worker_002.get_full_name()
-print(f'Сотрудник {Worker.name} {Worker.surname} в сумме получает {worker_002.get_total_income()}$')
+worker_002 = Position('Пётр', 'Манечкин', 'Менеджер', 2000, 100)
+print(worker_002.get_full_name())
+print(worker_002.get_total_income())
